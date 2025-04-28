@@ -1,1 +1,91 @@
 @import url(./style.css);
+
+.form-pedido,
+.valor-total {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px var(--transp1);
+    margin: 20px;
+}
+
+.form-pedido label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.form-pedido input, 
+.form-pedido select,
+.form-pedido button{
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid var(--cor4);
+    border-radius: 5px;
+}
+
+.form-pedido button {
+    width: 60%;
+    height: 5%;
+    background: var(--cor2);
+    color: var(--cor1);
+    cursor: pointer;
+    border: none;
+}
+
+.form-pedido button:hover {
+    background: var(--cor3);
+}
+
+.pedidos {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+.coluna {
+    flex: 1;
+    margin: 0 10px;
+}
+
+.coluna h2 {
+    text-align: center;
+    color: var(--cor1);
+}
+
+.cards {
+    background: var(--cor4);
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 2px 5px var(--transp1);
+    margin-top: 10px;
+}
+
+.card {
+    background: white;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px var(--transp1);
+}
+
+.card h3 {
+    margin: 0 0 10px;
+    color: var(--cor1);
+}
+
+.card p {
+    margin: 5px 0;
+}
+
+.card button {
+    background: var(--cor3);
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    display: block;
+    width: 100%;
+}

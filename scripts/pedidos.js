@@ -1,64 +1,61 @@
+const tbody = document.getElementById('tbodyPedidos');
+const valorTotalPedidosElement = document.getElementById('valorTotalPedidos'); // Elemento para mostrar o total
+const pedidosFinalizados = JSON.parse(localStorage.getItem('pedidosFinalizados')) || [];
 const produtos = [
     { id: 1, nome: "Hamburguer", preco: 15.00 },
-    { id: 2, nome: "X-Burguer", preco: 20.00 },
+    { id: 2, nome: "X-Burguer", preco: 18.00 },
     { id: 3, nome: "X-Salada", preco: 20.00 },
     { id: 4, nome: "X-Bacon", preco: 25.00 },
     { id: 5, nome: "X-Egg", preco: 30.00 },
-    { id: 6, nome: "X-Tudo", preco: 35.00 }
+    { id: 6, nome: "X-Tudo", preco: 35.00 },
+    { id: 7, nome: "X-Frango", preco: 20.00 },
+    { id: 8, nome: "X-Calabresa", preco: 25.00 },
+    { id: 9, nome: "X-Picanha", preco: 30.00 },
+    { id: 10, nome: "X-File", preco: 35.00 },
+    { id: 11, nome: "X-Coração", preco: 20.00 },
+    { id: 12, nome: "X-Misto", preco: 25.00 },
+    { id: 13, nome: "X-Batata", preco: 30.00 },
+    { id: 14, nome: "X-Vegano", preco: 35.00 },
+    { id: 19, nome: "Guaraná Lata", preco: 6.00 },
+    { id: 20, nome: "Coca-Cola Lata", preco: 7.00 },
+    { id: 21, nome: "Fanta Lata", preco: 6.50 },
+    { id: 22, nome: "Água Mineral", preco: 3.00 },
+    { id: 23, nome: "Suco Natural", preco: 8.00 },
+    { id: 24, nome: "Cerveja Lata", preco: 10.00 }
 ];
 
-const pedidoForm = document.getElementById('pedidoForm');
-const pedidosContainer = document.getElementById('pedidosContainer');
-const tabelaFinalizados = document.getElementById('t abelaFinalizados');
-const tbodyFinalizados = document.getElementById('tbodyFinalizados');
-const btnConcluidos = document.getElementById('btnConcluidos');
+let valorTotalGeral = 0; // Variável para armazenar o valor total de todos os pedidos
 
-produtos.forEach(produto => {
-    const option = document.createElement('option');
-    option.value = produto.id;
-    option.textContent = produto.nome;
-    document.getElementById('produtoSelect').appendChild(option);
-});
+pedidosFinalizados.forEach(pedido => {
+    const tr = document.createElement('tr');
 
-pedidoForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const clienteNome = document.getElementById('clienteNome').value;
-    const produtoId = document.getElementById('produtoSelect').value;
-    const produto = produtos.find(p => p.id == produtoId);
-    const dataHora = new Date().toLocaleString();
+    // Calcular o valor total do pedido
+    const produtosSelecionados = pedido.produtos; // Supondo que os produtos estão armazenados como um array
+    let valorTotalPedido = 0;
 
-    const card = document.createElement('div');
-    card.classList.add('card');
-    card.innerHTML = `
-        <h3>${produto.nome}</h3>
-        <p>Cliente: ${clienteNome}</p>
-        <p>Data e Hora: ${dataHora}</p>
-        <button onclick="finalizarPedido(this)">Finalizar Pedido</button>
+    produtosSelecionados.forEach(produtoNome => {
+        const produto = produtos.find(p => p.nome === produtoNome);
+        if (produto) {
+            valorTotalPedido += produto.preco; // Somar o preço do produto ao total do pedido
+        }
+    });
+
+    valorTotalGeral += valorTotalPedido; // Somar o valor do pedido ao total geral
+
+    tr.innerHTML = `
+        <td>${pedido.id}</td>
+        <td>${pedido.cliente}</td>
+        <td>${pedido.endereco}</td>
+        <td>${pedido.produtos.join(', ')}</td>
+        <td>${pedido.data}</td>
+        <td>${pedido.hora}</td>
+        <td>${pedido.horaEntrega || 'N/A'}</td>
+        <td>${pedido.horaChegada || 'N/A'}</td>
+        <td>R$ ${valorTotalPedido.toFixed(2)}</td> <!-- Exibir o valor total do pedido -->
     `;
-    pedidosContainer.appendChild(card);
-    pedidoForm.reset();
+
+    tbody.appendChild(tr);
 });
 
-function finalizarPedido(button) {
-    const card = button.parentElement;
-    const clienteNome = card.querySelector('p').textContent.split(': ')[1];
-    const produtoNome = card.querySelector('h3').textContent;
-    const dataHora = card.querySelector('p:nth-child(3)').textContent.split(': ')[1];
-
-    const row = document.createElement('tr');
-    row.innerHTML = `
-        <td>${clienteNome}</td>
-        <td>${produtoNome}</td>
-        <td>${dataHora}</td>
-    `;
-    tbodyFinalizados.appendChild(row);
-    localStorage.setItem('finalizados', tbodyFinalizados.innerHTML);
-    card.remove();
-}
-
-btnConcluidos.addEventListener('click', function() {
-    const finalizados = localStorage.getItem('finalizados');
-    tbodyFinalizados.innerHTML = finalizados || '';
-    document.getElementById('finalizados').classList.remove('hidden');
-    document.getElementById('listagem').classList.add('hidden');
-});
+// Atualizar o valor total no card
+valorTotalPedidosElement.textContent = valorTotalGeral.toFixed(2);

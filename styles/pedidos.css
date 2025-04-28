@@ -1,1 +1,59 @@
 @import url(./style.css);
+
+.tabela-pedidos {
+    margin: 20px;
+    background: white;
+    border-radius: 8px; 
+    box-shadow: 0 4px 10px var(--transp1); 
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid var(--cor4);
+    padding: 12px; 
+    text-align: left;
+}
+
+th {
+    background-color: var(--cor2);
+    color: var(--cor1);
+    font-weight: bold; 
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--cor4);
+}
+
+tbody tr:hover {
+    background-color: var(--transp2);
+}
+
+tbody td {
+    color: var(--cor1);
+}
+
+
+.valor-total {
+    margin: 20px;
+    background: var(--cor5); 
+    border-radius: 8px;
+    box-shadow: 0 4px 10px var(--transp1);
+    padding: 20px;
+    text-align: center; 
+}
+
+.valor-total h2 {
+    margin: 0 0 10px;
+    color: var(--cor1);
+}
+
+.valor-total p {
+    font-size: 1.0em; 
+    color: var(--cor1);
+    font-weight: bold; 
+}

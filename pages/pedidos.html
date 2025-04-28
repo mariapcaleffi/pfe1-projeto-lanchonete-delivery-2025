@@ -1,13 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lanchonete Delivery</title>
-    <link rel="stylesheet" href="../styles/pedidos.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pedidos Finalizados</title>
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="stylesheet" href="../styles/pedidos.css">
 </head>
 <body>
-    
+  <header>
+    <h1>Lanchonete Delivery</h1>
+    <a href="home.html" class="button">Voltar</a>
+  </header>
+
+  <section class="tabela-pedidos">
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Cliente</th>
+                <th>Endereço</th>
+                <th>Produto</th>
+                <th>Data</th>
+                <th>Hora Pedido</th>
+                <th>Hora Saída</th>
+                <th>Hora Chegada</th>
+                <th>Valor Total</th> <!-- Nova coluna para o valor total -->
+            </tr>
+        </thead>
+        <tbody id="tbodyPedidos"></tbody>
+    </table>
+</section>
+
+  <section class="valor-total">
+    <h2>Valor Total dos Pedidos</h2>
+    <div id="totalCard" class="card">
+        <p><strong>Total:</strong> R$ <span id="valorTotalPedidos">0.00</span></p>
+    </div>
+</section>
+
+  <script src="../scripts/pedidos.js"></script>
 </body>
-<script src="../scripts/pedidos.js"></script>
 </html>
